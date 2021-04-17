@@ -25,6 +25,7 @@
   },
   "homepage": "git@github.com:AlayaCare/cypress-interview-handbook.git#readme",
   "dependencies": {
+    "cypress-get-table": "1.0.1",
     "json-server": "0.16.3",
     "nocache": "2.1.0",
     "serve": "11.3.0"

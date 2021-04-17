@@ -8,3 +8,5 @@ cypress/fixtures/**
 .history
 .vscode
 env
+/.vs/automation-challenge/v16
+/.vs/slnx.sqlite
