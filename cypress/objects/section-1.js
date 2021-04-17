@@ -45,15 +45,15 @@ const Section1 = {
             await cy.get(Section1.elements.showFormButton).click()
         },
 
-        async enterNameInFormAndValidateItsPoplated(name: String) {
+        async enterNameInFormAndValidateItsPoplated(name) {
             await cy.get(Section1.elements.formNameInput).type(name).should('have.value', name)
         },
 
-        async enterAgeInFormAndValidateItsPoplated(age: String) {
+        async enterAgeInFormAndValidateItsPoplated(age) {
             await cy.get(Section1.elements.formNameInput).type(age).should('have.value', age)
         },
 
-        async selectGenderInFormAndValidateItsValueIsSelectedProperly(gender: String) {
+        async selectGenderInFormAndValidateItsValueIsSelectedProperly(gender) {
             await cy.get('select').select(gender)
             await cy.get('select#gender option:selected').should('have.text',gender)
         },      

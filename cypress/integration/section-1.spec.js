@@ -1,47 +1,51 @@
 
 const { Section1 } = require('../objects/section-1')
 
-describe('Section 1', () =>
-{
-    beforeEach(async()=>
-    {
+describe('Section 1 DOM table', () => {
+    beforeEach(async () => {
         await cy.visit('section-1');
     })
 
 
-    it('Show Table Button is displayed', async() => {
+    it('Show Table Button is displayed', async () => {
         await Section1.actions.assertTableButtonIsPresentOrNot();
     })
 
-    it('Assert Table is not present by default', async() => {
+    it('Assert Table is not present by default', async () => {
         await Section1.actions.assertTableIsPresentOrNot();
     })
 
-    it('Assert Table has 5 Columns', async() => {
+    it('Assert Table has 5 Columns', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertTableHasExpectedNumberOfColumns();
     })
 
-    it('Assert Table has 10 rows', async() => {
+    it('Assert Table has 10 rows', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertTableHasExpectedNumberOfRows();
     })
 
-    it('Validate that Admin has ID as 1', async() => {
+    it('Validate that Admin has ID as 1', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertIDAdminHasIDas1();
     })
 
 
-    it('Validate that role user is assigned to greater than 5 user', async() => {
+    it('Validate that role user is assigned to greater than 5 user', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertRoleUserIsAssignedToMoreThan5Users();
     })
 
-    it('Validate exactly 3 people are older than 60', async() => {
+    it('Validate exactly 3 people are older than 60', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertExactly3PeopleAreOlderThan60();
-     })
+    })
+   })
+
+  describe('Section 1 DOM Form', () => {
+        beforeEach(async () => {
+            await cy.visit('section-1');
+        })
 
     it('Assert form is not visible', async () => {
         await Section1.actions.assertFormIsNotVisibleByDefault();
@@ -78,10 +82,4 @@ describe('Section 1', () =>
     })
 
 
-
-    afterEach(async() =>
-    {
-        cy.screenshot();
-    }
-)
 })
