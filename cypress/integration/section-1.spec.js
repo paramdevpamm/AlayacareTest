@@ -20,7 +20,7 @@ describe('Section 1 DOM table', () => {
         await Section1.actions.assertTableHasExpectedNumberOfColumns();
     })
 
-    it('Assert Table has 10 rows', async () => {
+    it.only('Assert Table has 10 rows', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertTableHasExpectedNumberOfRows();
     })
@@ -42,8 +42,8 @@ describe('Section 1 DOM table', () => {
     })
    })
 
-  describe('Section 1 DOM Form', () => {
-        beforeEach(async () => {
+describe('Section 1 DOM Form', () => {
+    beforeEach(async () => {
             await cy.visit('section-1');
         })
 

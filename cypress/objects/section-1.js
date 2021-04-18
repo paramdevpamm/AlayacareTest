@@ -13,7 +13,7 @@ const Section1 = {
         showTableButton: "#table-toggle-button",
         tableID: "#alaya-table",
         tableHeader: ".table-header",
-        countColumns: "#alaya-table>tbody>tr>th",
+        countColumns: "#alaya-table>tbody>tr.table-header>th",
         countRows: "#alaya-table>tbody>tr",
         roleColumn: "#alaya-table>tbody>tr th:nth-child(4)",
         DOBColumn: "#alaya-table>tbody>tr th:nth-child(3)",
@@ -22,7 +22,7 @@ const Section1 = {
         formNameInput: "#fullName",
         formAgeInput: "#age",
         formGenderDropDown: "#gender",
-        formNurseCHeckBox: "#nurse",
+        formNurseCheckBox: "#nurse",
         formSubmitButton:"#submit"
     },
 
@@ -38,7 +38,7 @@ const Section1 = {
          * This is only used as an example and can be safely deleted.
          */
         async clickOnShowTableButton() {
-            await cy.get(Section1.elements.showTableButton).click()
+                await cy.get(Section1.elements.showTableButton).click()
         },
 
         async clickOnShowFormButton() {
@@ -46,27 +46,38 @@ const Section1 = {
         },
 
         async enterNameInFormAndValidateItsPoplated(name) {
-            await cy.get(Section1.elements.formNameInput).type(name).should('have.value', name)
+            await cy.get(Section1.elements.formID).within(($form) => {
+                cy.get(Section1.elements.formNameInput).type('testing').should('have.value', 'testing')
+            })
+           
         },
 
         async enterAgeInFormAndValidateItsPoplated(age) {
-            await cy.get(Section1.elements.formNameInput).type(age).should('have.value', age)
+            await cy.get(Section1.elements.formID).within(($form) => {
+                cy.get(Section1.elements.formNameInput).type(age).should('have.value', age)
+            })
         },
 
         async selectGenderInFormAndValidateItsValueIsSelectedProperly(gender) {
-            await cy.get('select').select(gender)
-            await cy.get('select#gender option:selected').should('have.text',gender)
+            await cy.get(Section1.elements.formID).within(($form) => {
+                cy.get('select').select(gender)
+                cy.get('select#gender option:selected').should('have.text', gender)
+            })
         },      
 
         async clickOnCheckBoxOfNurseAndValidateItsValue() {
-            await cy.get(Section1.elements.formNurseCHeckBox).check({
-                force: true
-            }).should('be.checked')
+            await cy.get(Section1.elements.formID).within(($form) => {
+                cy.get(Section1.elements.formNurseCheckBox).check({
+                    force: true
+                }).should('be.checked')
+            })
         },
 
         async clickOnSubmitButtonOnFormAndValidateThePopUp() {
-            await cy.get(Section1.elements.formSubmitButton).click()
-            await cy.on('window:alert', 'Form submitted!') 
+            await cy.get(Section1.elements.formID).within(($form) => {
+                cy.get(Section1.elements.formSubmitButton).click()
+                cy.on('window:alert', 'Form submitted!')
+            })
         },
 
         async assertTableButtonIsPresentOrNot() {
@@ -76,12 +87,12 @@ const Section1 = {
         async assertTableIsPresentOrNot() {
             await cy.get(Section1.elements.tableID).should('not.be.visible')
         }, 
-        async assertTableHasExpectedNumberOfColumns() {
-            await cy.get(Section1.elements.countColumns).should('have.length', 5)
+        async assertTableHasExpectedNumberOfColumns() {            
+           await cy.get(Section1.elements.countColumns).should('have.length', 5)
         },
 
         async assertTableHasExpectedNumberOfRows() {
-            await cy.get(Section1.elements.countRows).should('have.length', 10)
+            await cy.get(Section1.elements.countRows).should('have.length', 11)
         },
 
         async assertIDAdminHasIDas1() {
