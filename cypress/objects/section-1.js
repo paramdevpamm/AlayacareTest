@@ -92,7 +92,7 @@ const Section1 = {
         },
 
         async assertTableHasExpectedNumberOfRows() {
-            await cy.get(Section1.elements.countRows).should('have.length', 11)
+            await cy.get((Section1.elements.countRows)-1).should('have.length', 10)
         },
 
         async assertIDAdminHasIDas1() {
@@ -106,12 +106,10 @@ const Section1 = {
         async assertRoleUserIsAssignedToMoreThan5Users()
         {
             var count = 0;
-            await cy.get(Section1.elements.roleColumn).each(($e,index,$list) => {
-                const text = $e.text()
-                if (text.includes("user")) {
-                    count++
-                }
-            })
+            await cy.get(Section1.elements.countRows).contains('user').parent().within(function () {
+                count = count +1
+            }
+            )
             expect(count).to.be.greaterThan(5)
         },
 

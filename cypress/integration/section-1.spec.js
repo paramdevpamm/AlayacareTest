@@ -20,7 +20,7 @@ describe('Section 1 DOM table', () => {
         await Section1.actions.assertTableHasExpectedNumberOfColumns();
     })
 
-    it.only('Assert Table has 10 rows', async () => {
+    it('Assert Table has 10 rows', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertTableHasExpectedNumberOfRows();
     })
@@ -31,7 +31,7 @@ describe('Section 1 DOM table', () => {
     })
 
 
-    it('Validate that role user is assigned to greater than 5 user', async () => {
+    it.only('Validate that role user is assigned to greater than 5 user', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertRoleUserIsAssignedToMoreThan5Users();
     })
