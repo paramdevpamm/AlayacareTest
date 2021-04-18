@@ -31,7 +31,7 @@ describe('Section 1 DOM table', () => {
     })
 
 
-    it.only('Validate that role user is assigned to greater than 5 user', async () => {
+    it('Validate that role user is assigned to greater than 5 user', async () => {
         await Section1.actions.clickOnShowTableButton();
         await Section1.actions.assertRoleUserIsAssignedToMoreThan5Users();
     })

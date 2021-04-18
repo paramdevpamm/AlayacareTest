@@ -15,6 +15,7 @@ const Section1 = {
         tableHeader: ".table-header",
         countColumns: "#alaya-table>tbody>tr.table-header>th",
         countRows: "#alaya-table>tbody>tr",
+        totalColumns: "#alaya-table>tbody>tr>th",
         roleColumn: "#alaya-table>tbody>tr th:nth-child(4)",
         DOBColumn: "#alaya-table>tbody>tr th:nth-child(3)",
         formID: "#alaya-form",
@@ -106,22 +107,30 @@ const Section1 = {
         async assertRoleUserIsAssignedToMoreThan5Users()
         {
             var count = 0;
-            await cy.get(Section1.elements.countRows).contains('user').parent().within(function () {
-                count = count +1
-            }
-            )
+            await cy.get(Section1.elements.totalColumns).each(($e) => {
+                console.log($e.text())
+                if (cy.get($e).should('contain.text', 'user')) {
+                    count++
+                }
+
+            })
             expect(count).to.be.greaterThan(5)
         },
 
         async assertExactly3PeopleAreOlderThan60() {
             var count = 0;
-            await cy.get(Section1.elements.roleColumn).each(($e, index, $list) => {
-                const dob = $e.text().to
-                if (text.includes("user")) {
-                    count++
-                }
-            })
-            expect(count).to.be.greaterThan(5)
+            const dateToday = new Date()
+            const timestamp = epoch(dateToday)
+            await cy.get(Section1.elements.countRows).parent().within(function () {
+                cy.get('th').eq(3).each(($e) => {
+                    var dob = epoch(new Date($e.text))
+                    if ((timestamp - dob > 1893415560)) {
+                        count ++
+                    }
+                })
+            }
+            )
+            expect(count).to.be(3)
         },
 
         async assertFormIsNotVisibleByDefault() {
